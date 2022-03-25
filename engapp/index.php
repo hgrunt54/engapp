@@ -4,7 +4,7 @@
     $password = '12345';
     $db = new PDO($dsn, $username, $password);
     
-    $cfrs = $db->query("SELECT cfrname FROM `dbo.cfr`");
+    $cfrs = $db->query("SELECT cfrname FROM `dbo.cfr` ORDER BY cfrname ASC");
     
     if (!empty($_POST)){
         $cfrguids = $db->query("SELECT cfrguid FROM `dbo.cfr` WHERE cfrname = '{$_POST['cfrSel']}'");
@@ -41,10 +41,10 @@ and open the template in the editor.
                     <option value=<?php echo $cfr['cfrname'] ?>><?php echo $cfr['cfrname'] ?></option>
                     <?php endforeach ?>
                 </select>
-                <input type='button' onclick='results()' value='Go!'>
+                <button type='submit'>'Go!'</button>
             </form>
             <?php if(!empty($cfrguids)): ?>
-                <div id="result" style="dis">
+                <div id="result">
                     <?php foreach ($cfrguids as $guid) : ?>
                         <p>CFR GUID: <?php echo $guid['cfrguid'] ?></p>
                     <?php endforeach ?>
