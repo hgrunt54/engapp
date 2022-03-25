@@ -7,7 +7,7 @@
     $cfrs = $db->query("SELECT cfrname FROM `dbo.cfr`");
     
     if (!empty($_POST)){
-        $cfrguids = $db->query("SELECT cfrguid FROM `dbo.cfr`");
+        $cfrguids = $db->query("SELECT cfrguid FROM `dbo.cfr` WHERE cfrname = '{$_POST['cfrSel']}'");
     }
     else {
         $cfrguids = [];
@@ -33,10 +33,10 @@ and open the template in the editor.
         </script>
         <h1>Welcome to My Engagement Web API</h1>
 
-            <form id="filter">
+            <form id="filter" method="POST">
                 <p>Section of the app to select the CFR to grab binders from.</p>
                 <label>CFR: </label>
-                <select name='cfrSel' method='post'>
+                <select name='cfrSel'>
                     <?php foreach ($cfrs as $cfr) : ?>
                     <option value=<?php echo $cfr['cfrname'] ?>><?php echo $cfr['cfrname'] ?></option>
                     <?php endforeach ?>
